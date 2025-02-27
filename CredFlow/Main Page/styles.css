@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+@theme {
+  /* ... */
+}
+/* Custom Tailwind Styling */
+
+/* Reset default margins/paddings */
+body, h1, h2, h3, h4, h5, h6, p, table, th, td {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #f8fafc;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Card styles for modern look */
+.card {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+.card:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Navbar styles */
+.nav-link {
+  color: #e2e8f0;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #f7fafc;
+}
+
+/* Button styles */
+.btn-primary {
+  background-color: #3182ce;
+  color: white;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #2b6cb0;
+}
+
+/* Input field styles */
+.input-field {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #e2e8f0;
+  background-color: white;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.input-field:focus {
+  border-color: #3182ce;
+  outline: none;
+}
+
+/* Footer styles */
+.footer {
+  background-color: #f1f5f9;
+  padding: 1.5rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: #4a5568;
+}

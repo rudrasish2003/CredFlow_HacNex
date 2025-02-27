@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CredFlow - Digital Udhaari System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="styles.css" rel="stylesheet"> <!-- External CSS -->
+</head>
+
+<body class="bg-gray-50 font-inter">
+
+  <!-- Navbar -->
+  <nav class="bg-blue-600 p-4">
+    <div class="max-w-7xl mx-auto flex justify-between items-center text-white">
+      <a class="text-3xl font-semibold" href="#">CredFlow</a>
+      <div class="hidden md:flex space-x-6">
+        <a class="nav-link" href="#inventory">Inventory</a>
+        <a class="nav-link" href="#profit">Profit Calculation</a>
+        <a class="nav-link" href="#cibil">CIBIL Score</a>
+      </div>
+      <div class="md:hidden">
+        <button id="hamburgerBtn" class="text-white">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden mt-4 space-y-4">
+      <a class="block text-white hover:bg-blue-500 p-3 rounded-lg" href="#inventory">Inventory</a>
+      <a class="block text-white hover:bg-blue-500 p-3 rounded-lg" href="#profit">Profit Calculation</a>
+      <a class="block text-white hover:bg-blue-500 p-3 rounded-lg" href="#cibil">CIBIL Score</a>
+    </div>
+  </nav>
+
+  <!-- Dashboard Section -->
+  <div class="container mx-auto p-6">
+    <h2 class="text-3xl font-semibold text-gray-800 mb-6">Welcome to CredFlow</h2>
+
+    <!-- Summary Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="card">
+        <h5>Total Sales</h5>
+        <p id="totalSales" class="text-xl text-blue-600">₹0</p>
+      </div>
+      <div class="card">
+        <h5>Outstanding Amount</h5>
+        <p id="outstandingAmount" class="text-xl text-red-600">₹0</p>
+      </div>
+      <div class="card">
+        <h5>CIBIL Score</h5>
+        <p id="cibilScore" class="text-xl text-green-600">N/A</p>
+      </div>
+    </div>
+
+    <!-- Inventory Section -->
+    <div id="inventory" class="mt-12">
+      <h3 class="text-2xl font-semibold text-gray-800">Inventory Management</h3>
+      <table class="table-auto w-full mt-4 bg-white border border-gray-200 rounded-lg shadow-md">
+        <thead>
+          <tr>
+            <th class="px-4 py-2 text-left">Product Name</th>
+            <th class="px-4 py-2 text-left">Quantity</th>
+            <th class="px-4 py-2 text-left">Price</th>
+            <th class="px-4 py-2 text-left">Total Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="px-4 py-2">Product 1</td>
+            <td class="px-4 py-2">50</td>
+            <td class="px-4 py-2">₹100</td>
+            <td class="px-4 py-2">₹5000</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2">Product 2</td>
+            <td class="px-4 py-2">30</td>
+            <td class="px-4 py-2">₹200</td>
+            <td class="px-4 py-2">₹6000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Profit Calculation Section -->
+    <div id="profit" class="mt-12">
+      <h3 class="text-2xl font-semibold text-gray-800">Profit Calculation</h3>
+      <form id="profitForm" class="mt-6 space-y-6">
+        <div>
+          <label for="totalSalesInput" class="block text-gray-700">Total Sales</label>
+          <input type="number" class="input-field" id="totalSalesInput" placeholder="Enter total sales" required>
+        </div>
+        <div>
+          <label for="totalCostInput" class="block text-gray-700">Total Cost</label>
+          <input type="number" class="input-field" id="totalCostInput" placeholder="Enter total cost" required>
+        </div>
+        <button type="submit" class="btn-primary w-full">Calculate Profit</button>
+      </form>
+      <h4 class="mt-6 text-xl font-semibold">Profit: ₹<span id="profitDisplay">0</span></h4>
+    </div>
+
+    <!-- CIBIL Score Section -->
+    <div id="cibil" class="mt-12">
+      <h3 class="text-2xl font-semibold text-gray-800">Customer's CIBIL Score</h3>
+      <p id="cibilScoreValue" class="text-xl text-green-600">750</p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer bg-gray-200 py-3 mt-12 text-center">
+    <p>&copy; 2025 CredFlow - All rights reserved.</p>
+  </div>
+
+  <!-- Script for profit calculation and mobile menu toggle -->
+  <script>
+    document.getElementById("profitForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const totalSales = parseFloat(document.getElementById("totalSalesInput").value);
+      const totalCost = parseFloat(document.getElementById("totalCostInput").value);
+      const profit = totalSales - totalCost;
+      document.getElementById("profitDisplay").textContent = profit.toFixed(2);
+    });
+
+    // Dummy Data for CIBIL Score and Sales
+    document.getElementById("totalSales").textContent = "₹50000"; // Example Total Sales
+    document.getElementById("outstandingAmount").textContent = "₹20000"; // Example Outstanding Amount
+
+    // Toggle mobile menu visibility
+    document.getElementById("hamburgerBtn").addEventListener("click", function() {
+      const menu = document.getElementById("mobileMenu");
+      menu.classList.toggle("hidden");
+    });
+  </script>
+
+</body>
+
+</html>
