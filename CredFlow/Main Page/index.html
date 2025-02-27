@@ -1,143 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CredFlow - Digital Udhaari System</title>
+  <title>Scan - CredFlow</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link href="styles.css" rel="stylesheet"> <!-- External CSS -->
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    #video {
+      display: none;
+      width: 100%;
+      max-width: 500px;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+  </style>
 </head>
+<body class="bg-gray-50 min-h-screen flex">
+  
+  <!-- Sidebar -->
+  <aside class="w-64 bg-blue-600 text-white p-6 space-y-6">
+    <div class="text-2xl font-semibold">CredFlow</div>
+    <nav>
+      <a href="dashboard.html" class="block py-2 px-4 rounded hover:bg-blue-500">Dashboard</a>
+      <a href="inventory.html" class="block py-2 px-4 rounded hover:bg-blue-500">Inventory</a>
+      <a href="scan.html" class="block py-2 px-4 rounded bg-blue-500">Scan</a>
+      <a href="#" class="block py-2 px-4 rounded hover:bg-blue-500">Transactions</a>
+      <a href="#" class="block py-2 px-4 rounded hover:bg-blue-500">Reports</a>
+      <a href="#" class="block py-2 px-4 rounded hover:bg-blue-500">Settings</a>
+    </nav>
+  </aside>
 
-<body class="bg-gray-50 font-inter">
-
-  <!-- Navbar -->
-  <nav class="bg-blue-600 p-4">
-    <div class="max-w-7xl mx-auto flex justify-between items-center text-white">
-      <a class="text-3xl font-semibold" href="#">CredFlow</a>
-      <div class="hidden md:flex space-x-6">
-        <a class="nav-link" href="inventory.html">Inventory</a>
-        <a class="nav-link" href="#profit">Profit Calculation</a>
-        <a class="nav-link" href="#cibil">CIBIL Score</a>
-      </div>
-      <div class="md:hidden">
-        <button id="hamburgerBtn" class="text-white">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
+  <!-- Main Content -->
+  <main class="flex-1 p-8 flex">
+    <!-- Scanner Section -->
+    <div class="flex-1">
+      <h1 class="text-3xl font-semibold text-gray-700">Scan Items</h1>
+      <div class="mt-6 bg-white p-6 rounded-xl shadow-lg text-center">
+        <button id="openCamera" class="bg-blue-600 text-white px-6 py-3 rounded-lg text-lg font-semibold shadow-md hover:bg-blue-700 transition">
+          Open Camera to Scan
         </button>
+        <button id="closeCamera" class="bg-red-600 text-white px-6 py-3 rounded-lg text-lg font-semibold shadow-md hover:bg-red-700 transition hidden">
+          Close Scanner
+        </button>
+        <video id="video" autoplay></video>
       </div>
     </div>
-    <div id="mobileMenu" class="hidden md:hidden mt-4 space-y-4">
-      <a class="block text-white hover:bg-blue-500 p-3 rounded-lg" href="#inventory">Inventory</a>
-      <a class="block text-white hover:bg-blue-500 p-3 rounded-lg" href="#profit">Profit Calculation</a>
-      <a class="block text-white hover:bg-blue-500 p-3 rounded-lg" href="#cibil">CIBIL Score</a>
-    </div>
-  </nav>
-
-  <!-- Dashboard Section -->
-  <div class="container mx-auto p-6">
-    <h2 class="text-3xl font-semibold text-gray-800 mb-6">Welcome to CredFlow</h2>
-
-    <!-- Summary Cards -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="card">
-        <h5>Total Sales</h5>
-        <p id="totalSales" class="text-xl text-blue-600">₹0</p>
+    
+    <!-- Product Details Section -->
+    <div class="w-1/3 bg-white p-6 rounded-xl shadow-lg ml-6">
+      <h2 class="text-2xl font-semibold text-gray-700 mb-4">Product Details</h2>
+      <div id="productList">
+        <!-- Products will be added here dynamically -->
       </div>
-      <div class="card">
-        <h5>Outstanding Amount</h5>
-        <p id="outstandingAmount" class="text-xl text-red-600">₹0</p>
+      <div class="flex space-x-4 mb-4">
+        <input type="text" id="productName" class="input-field flex-1 border p-2 rounded" placeholder="Product Name">
+        <input type="number" id="productQty" class="input-field w-20 border p-2 rounded" placeholder="Qty">
+        <input type="text" id="productAmount" class="input-field w-24 border p-2 rounded" placeholder="Amount">
       </div>
-      <div class="card">
-        <h5>CIBIL Score</h5>
-        <p id="cibilScore" class="text-xl text-green-600">N/A</p>
-      </div>
+      <button id="addProduct" class="bg-blue-600 text-white px-6 py-3 rounded-lg text-lg font-semibold shadow-md hover:bg-blue-700 transition w-full mb-4">
+        Add Product
+      </button>
+      <button id="submitProducts" class="bg-green-600 text-white px-6 py-3 rounded-lg text-lg font-semibold shadow-md hover:bg-green-700 transition w-full">
+        Submit
+      </button>
     </div>
+  </main>
 
-    <!-- Inventory Section -->
-    <div id="inventory" class="mt-12">
-      <h3 class="text-2xl font-semibold text-gray-800">Inventory Management</h3>
-      <table class="table-auto w-full mt-4 bg-white border border-gray-200 rounded-lg shadow-md">
-        <thead>
-          <tr>
-            <th class="px-4 py-2 text-left">Product Name</th>
-            <th class="px-4 py-2 text-left">Quantity</th>
-            <th class="px-4 py-2 text-left">Price</th>
-            <th class="px-4 py-2 text-left">Total Value</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="px-4 py-2">Product 1</td>
-            <td class="px-4 py-2">50</td>
-            <td class="px-4 py-2">₹100</td>
-            <td class="px-4 py-2">₹5000</td>
-          </tr>
-          <tr>
-            <td class="px-4 py-2">Product 2</td>
-            <td class="px-4 py-2">30</td>
-            <td class="px-4 py-2">₹200</td>
-            <td class="px-4 py-2">₹6000</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Profit Calculation Section -->
-    <div id="profit" class="mt-12">
-      <h3 class="text-2xl font-semibold text-gray-800">Profit Calculation</h3>
-      <form id="profitForm" class="mt-6 space-y-6">
-        <div>
-          <label for="totalSalesInput" class="block text-gray-700">Total Sales</label>
-          <input type="number" class="input-field" id="totalSalesInput" placeholder="Enter total sales" required>
-        </div>
-        <div>
-          <label for="totalCostInput" class="block text-gray-700">Total Cost</label>
-          <input type="number" class="input-field" id="totalCostInput" placeholder="Enter total cost" required>
-        </div>
-        <button type="submit" class="btn-primary w-full">Calculate Profit</button>
-      </form>
-      <h4 class="mt-6 text-xl font-semibold">Profit: ₹<span id="profitDisplay">0</span></h4>
-    </div>
-
-    <!-- CIBIL Score Section -->
-    <div id="cibil" class="mt-12">
-      <h3 class="text-2xl font-semibold text-gray-800">Customer's CIBIL Score</h3>
-      <p id="cibilScoreValue" class="text-xl text-green-600">750</p>
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <div class="footer bg-gray-200 py-3 mt-12 text-center">
-    <p>&copy; 2025 CredFlow - All rights reserved.</p>
-  </div>
-
-  <!-- Script for profit calculation and mobile menu toggle -->
   <script>
-    document.getElementById("profitForm").addEventListener("submit", function (e) {
-      e.preventDefault();
-      const totalSales = parseFloat(document.getElementById("totalSalesInput").value);
-      const totalCost = parseFloat(document.getElementById("totalCostInput").value);
-      const profit = totalSales - totalCost;
-      document.getElementById("profitDisplay").textContent = profit.toFixed(2);
+    const openCameraBtn = document.getElementById('openCamera');
+    const closeCameraBtn = document.getElementById('closeCamera');
+    const video = document.getElementById('video');
+    let stream = null;
+
+    openCameraBtn.addEventListener('click', async () => {
+      try {
+        stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        video.srcObject = stream;
+        video.style.display = 'block';
+        openCameraBtn.classList.add('hidden');
+        closeCameraBtn.classList.remove('hidden');
+      } catch (error) {
+        console.error('Error accessing the camera:', error);
+      }
     });
 
-    // Dummy Data for CIBIL Score and Sales
-    document.getElementById("totalSales").textContent = "₹50000"; // Example Total Sales
-    document.getElementById("outstandingAmount").textContent = "₹20000"; // Example Outstanding Amount
-
-    // Toggle mobile menu visibility
-    document.getElementById("hamburgerBtn").addEventListener("click", function() {
-      const menu = document.getElementById("mobileMenu");
-      menu.classList.toggle("hidden");
+    closeCameraBtn.addEventListener('click', () => {
+      if (stream) {
+        let tracks = stream.getTracks();
+        tracks.forEach(track => track.stop());
+      }
+      video.style.display = 'none';
+      openCameraBtn.classList.remove('hidden');
+      closeCameraBtn.classList.add('hidden');
     });
 
-   
+    document.getElementById('addProduct').addEventListener('click', () => {
+      const name = document.getElementById('productName').value;
+      const qty = document.getElementById('productQty').value;
+      const amount = document.getElementById('productAmount').value;
+      
+      if (name && qty && amount) {
+        const productList = document.getElementById('productList');
+        const div = document.createElement('div');
+        div.classList.add('flex', 'justify-between', 'border-b', 'py-2');
+        div.innerHTML = `<span>${name}</span><span>${qty}</span><span>${amount}</span>`;
+        productList.appendChild(div);
+      }
+    });
 
+    document.getElementById('submitProducts').addEventListener('click', () => {
+      alert('Products submitted successfully!');
+    });
   </script>
-   <script src="https://cdn.tailwindcss.com"></script>
-
 </body>
-
 </html>
