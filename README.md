@@ -29,13 +29,13 @@ By digitizing business operations, our app empowers small vendors to:
 Here are some visuals showcasing key features of the app:
 
 ### Dashboard View
-![Dashboard](Screenshot(11).png)
+![Dashboard](home.png)
 
-### Credit Management
-![Credit Management](Screenshot(57).png)
+### Scan Page View
+![Credit Management](ScanPage.png)
 
-### Inventory Tracking
-![Inventory Tracking](Screenshot(13).png)
+### Scanning Window
+![Inventory Tracking](Scan.png)
 
 ## Technologies Used
 - **Frontend:** Html,Css,JavaScript
