@@ -29,7 +29,7 @@ By digitizing business operations, our app empowers small vendors to:
 Here are some visuals showcasing key features of the app:
 
 ### Dashboard View
-![Dashboard](home.png)
+![Dashboard](Home.png)
 
 ### Scan Page View
 ![Credit Management](ScanPage.png)
