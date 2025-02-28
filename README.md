@@ -11,12 +11,15 @@ Our smart business and credit management app is designed to simplify financial t
 - **Monitor Credit Transactions** – Easily record, manage, and track udhaari (credit amounts) to ensure timely settlements.
 - **Simple & Intuitive Dashboard** – Provides a clear financial summary at a glance.
 - **Scan-to-Detect Items** – Instantly identify and update inventory by scanning products.
+- **Inventory Forecasting** – Using Ai and helping shopkeepers to predict their inventory for the future.
+
 
 ## Features
 - **User-friendly interface** for easy navigation.
 - **Automated financial tracking** to reduce errors and improve efficiency.
 - **Instant inventory updates** with barcode or QR scanning.
 - **Secure data storage** to prevent loss of financial records.
+- **Inventory Forecasting** to predict customized inventory forecasting for shops.
 
 ## Impact
 By digitizing business operations, our app empowers small vendors to:
